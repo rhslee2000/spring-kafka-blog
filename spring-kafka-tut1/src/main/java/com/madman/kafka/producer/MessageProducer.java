@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MessageProducer {
 
 	@Autowired
-	private KafkaTemplate<String, String> template;
+	private KafkaTemplate<Integer, String> template;
 
 	public void publish(@RequestParam("topic") String topic, @RequestParam("msg") String message) {
 		template.send(topic, message);
