@@ -19,6 +19,12 @@ public class KafkaConsumerConfig {
 	@Value("${spring.kafka.bootstrap-servers}")
 	private String brokerAsString;
 
+	@Value("${spring.kafka.consumer.group-id}")
+	private String groupId;
+	
+	@Value("${spring.kafka.consumer.auto-offset-reset}")
+	private String autoOffsetReset;
+	
 	@Bean
 	ConcurrentKafkaListenerContainerFactory<Integer, String> kafkaListenerContainerFactory() {
 		ConcurrentKafkaListenerContainerFactory<Integer, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
@@ -35,7 +41,8 @@ public class KafkaConsumerConfig {
 	public Map<String, Object> consumerConfigs() {
 		Map<String, Object> props = new HashMap<>();
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, brokerAsString);
-		props.put(ConsumerConfig.GROUP_ID_CONFIG, "mygroup");
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetReset);
 		/*
 		 * the consumer automatically triggers offset commits periodically
 		 * according to the interval configured with “auto.commit.interval.ms.”

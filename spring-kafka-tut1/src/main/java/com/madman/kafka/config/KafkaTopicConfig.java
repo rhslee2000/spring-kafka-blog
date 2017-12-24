@@ -19,7 +19,7 @@ public class KafkaTopicConfig {
 	@Bean
 	public KafkaAdmin admin() {
 	    Map<String, Object> configs = new HashMap<>();
-	    configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+	    configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, brokerAsString);
 	    return new KafkaAdmin(configs);
 	}
 
